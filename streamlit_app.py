@@ -45,32 +45,41 @@ def generate_label(selected_items, label, default_text=""):
 
 # Horizontal Filters
 st.markdown("### Filtres")
+st.markdown("""
+- Les filtres fonctionnent avec une logique **OU** :
+    - Si plusieurs options sont sélectionnées dans un filtre, les résultats incluront toutes les lignes correspondant à **au moins une** des options sélectionnées.
+    - Si plusieurs filtres sont utilisés, les résultats incluront toutes les lignes correspondant à **au moins une** des options de chaque filtre.
+- Par défaut, aucun filtre n'est appliqué : aucun résultat n'est affiché.
+
+*Exemple :* Sélectionnez "Santé" dans **Grand Domaines** et "Commerce" dans **Domaines Professionnels** :  
+  Vous verrez les données correspondant à **Santé OU Commerce**.
+""")
 col1, col2, col3, col4 = st.columns(4)
 
 with col1:
     selected_grand_domaine = st.multiselect(
-        label=generate_label(grand_domaine_options, "Grand Domaines"),
+        label="Grands Domaines",
         options=grand_domaine_options,
         default=[]
     )
 
 with col2:
     selected_domaine_professionnel = st.multiselect(
-        label=generate_label(domaine_professionnel_options, "Domaines Professionnels"),
+        label="Domaines Professionnels",
         options=domaine_professionnel_options,
         default=[]
     )
 
 with col3:
     selected_rome = st.multiselect(
-        label=generate_label(rome_options, "Codes ROME"),
+        label="Codes ROME",
         options=rome_options,
         default=[]
     )
 
 with col4:
     selected_type_structure = st.multiselect(
-        label=generate_label(type_structure_options, "Types de Structures"),
+        label="Types de Structures",
         options=type_structure_options,
         default=[]
     )
