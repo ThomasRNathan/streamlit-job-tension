@@ -3,7 +3,7 @@ import pandas as pd
 import plotly.express as px
 
 # Path to your CSV file
-file_path = "/Users/thomaspc/streamlit-job-tension/fiches_de_poste_en_tension.csv"
+file_path = "fiches_de_poste_en_tension.csv"
 
 # Load CSV data with caching
 @st.cache_data
