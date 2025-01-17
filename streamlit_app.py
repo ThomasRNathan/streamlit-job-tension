@@ -125,21 +125,26 @@ if "latitude" in aggregated_data.columns and "longitude" in aggregated_data.colu
 else:
     st.error("Latitude and Longitude data are not available for mapping.")
 
-# Heatmap
-heatmap_data = data.groupby(["type_structure", "grand_domaine"], as_index=False).agg(
+# Rename Grand Domaine labels to their first letter
+data["grand_domaine_short"] = data["grand_domaine"].str[0]
+
+
+# Heatmap: Aggregate data by type_structure and grand_domaine_short
+heatmap_data = data.groupby(["type_structure", "grand_domaine_short"], as_index=False).agg(
     {"nombre_de_fiches_de_poste_en_tension": "sum"}
 )
 
+# Plot the Heatmap
 st.title("Heatmap sur les métiers en tension selon domaine / catégorie")
 fig = px.density_heatmap(
     heatmap_data,
     x="type_structure",
-    y="grand_domaine",
+    y="grand_domaine_short",
     z="nombre_de_fiches_de_poste_en_tension",
     color_continuous_scale="Viridis",
     labels={
         "type_structure": "Structure Type",
-        "grand_domaine": "Grand Domain",
+        "grand_domaine_short": "Grand Domain (Short)",
         "nombre_de_fiches_de_poste_en_tension": "Job Tensions"
     },
 )
